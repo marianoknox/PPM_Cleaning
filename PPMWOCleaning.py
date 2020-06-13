@@ -118,14 +118,14 @@ dfWithLocation['Task/Work Subject Group'] = dfWithLocation['Task/Work Subject Gr
 
 dfWithLocation['Task/Work Subject Group'] = dfWithLocation['Task/Work Subject Group'].str.lower()
 
-def getInput(listOfRef, txtFrom) :
+def getLocation(listOfRef, txtFrom) :
     for curRef in listOfRef :
         if curRef in txtFrom :
             return curRef.lower()
     return "not available"
 
 
-dfWithLocation['FreqRef'] = dfWithLocation['Task/Work Subject Group'].apply(lambda x: getInput(dfFrequency['FreqRef'], x))
+dfWithLocation['FreqRef'] = dfWithLocation['Task/Work Subject Group'].apply(lambda x: getLocation(dfFrequency['FreqRef'], x))
 dfWithLocation = pd.merge(dfWithLocation, dfFrequency)
 
 row = len(df)
@@ -152,14 +152,14 @@ except :
 dfWithLocation[['WO','Task/Work Subject Group','Frequency']].head()
 
 ## Adding system column
-def getInput(listOfRef, txtFrom) :
+def getSystem(listOfRef, txtFrom) :
     for curRef in listOfRef :
         if curRef in txtFrom :
             return curRef.lower()
     return "not available"
     
 
-dfWithLocation['SysRef'] = dfWithLocation['Task/Work Subject Group'].apply(lambda x: getInput(dfSystem['SysRef'], x))
+dfWithLocation['SysRef'] = dfWithLocation['Task/Work Subject Group'].apply(lambda x: getSystem(dfSystem['SysRef'], x))
 dfWithLocation = pd.merge(dfWithLocation, dfSystem)
 
 row = len(df)
